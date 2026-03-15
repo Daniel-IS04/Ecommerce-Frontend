@@ -1,0 +1,30 @@
+src/app/
+ │
+ ├── core/                              <-- NÚCLEO: Todo lo que se comunica con Django
+ │    ├── constants/
+ │    │    └── api.constants.ts         <-- 1. Aquí irá tu 'http://localhost:8000/api'
+ │    │
+ │    ├── services/
+ │    │    ├── base-http.service.ts     <-- 2. El Padre (Heredable)
+ │    │    └── auth.service.ts          <-- 3. El Hijo (Reemplazará a tu data.ts actual)
+ │    │
+ │    └── models/
+ │         └── user.interface.ts        <-- 4. Para darle "molde" a los datos de registro
+ │
+ ├── pages/                             <-- PANTALLAS: Tus vistas para el Router
+ │    └── auth/
+ │         ├── login/
+ │         │    ├── login.component.ts
+ │         │    ├── login.component.html
+ │         │    └── login.component.css
+ │         │
+ │         └── register/
+ │              ├── register.component.ts   <-- 5. Aquí mudaremos el código de app.ts
+ │              ├── register.component.html <-- 6. Aquí mudaremos el formulario
+ │              └── register.component.css
+ │
+ ├── app.config.ts                      <-- Ya lo tienes (Aquí está provideHttpClient)
+ ├── app.routes.ts                      <-- Ya lo tienes (Aquí configuraremos las rutas)
+ ├── app.ts                             <-- Se limpiará: Solo tendrá el menú y <router-outlet>
+ ├── app.html
+ └── app.css

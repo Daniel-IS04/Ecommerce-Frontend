@@ -1,0 +1,24 @@
+<div class="register-container">
+  <div class="register-card">
+    <h3>Registro Ecommerce</h3>
+
+    <div class="form-group">
+      <input [(ngModel)]="nuevoUsuario.first_name" placeholder="Nombre" name="fname">
+      <input [(ngModel)]="nuevoUsuario.last_name" placeholder="Apellido" name="lname">
+      <input [(ngModel)]="nuevoUsuario.email" placeholder="Email" name="email">
+      <input [(ngModel)]="nuevoUsuario.dni" placeholder="DNI (8 dígitos)" name="dni">
+      <input [(ngModel)]="nuevoUsuario.phone_number" placeholder="Celular (9 dígitos)" name="phone">
+      <input type="date" [(ngModel)]="nuevoUsuario.birth_date" name="bdate">
+      <input type="password" [(ngModel)]="nuevoUsuario.password" placeholder="Contraseña" name="pass1">
+      <input type="password" [(ngModel)]="nuevoUsuario.password2" placeholder="Repite Contraseña" name="pass2">
+
+      <button (click)="ejecutarRegistro()">Crear Cuenta</button>
+    </div>
+
+    @if (mensaje()) {
+    <div class="mensaje-box" [class.success]="mensaje().includes('éxito')" [class.error]="mensaje().includes('Fallo')">
+      <small>{{ mensaje() }}</small>
+    </div>
+    }
+  </div>
+</div>

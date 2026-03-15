@@ -1,0 +1,138 @@
+<div class="flex flex-col gap-20 py-8">
+
+  <section id="inicio" class="text-center flex flex-col items-center">
+    <h1 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">
+      Bienvenido a <span
+        class="bg-gradient-to-b from-white via-amber-300 to-amber-500 bg-clip-text text-transparent">ANGELSTORE</span>
+    </h1>
+    <p class="text-lg text-slate-400 max-w-2xl mb-10 leading-relaxed">
+      Tu destino definitivo para encontrar el mejor setup de desarrollo y hardware de alto rendimiento. Construye el
+      espacio perfecto para escribir tu código.
+    </p>
+
+    <figure class="relative group">
+      <div
+        class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-amber-700 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200">
+      </div>
+      <img src="assets/imagen.jpg" alt="Setup de desarrollo profesional"
+        class="relative rounded-2xl border border-slate-800 shadow-2xl max-w-4xl w-full object-cover aspect-video">
+    </figure>
+  </section>
+
+  <section id="sobre">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-white">Sobre Nosotros</h2>
+      <div class="h-1 w-20 bg-amber-500 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <article
+        class="bg-slate-900/50 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition-colors">
+        <h3 class="text-amber-400 font-bold text-xl mb-3 flex items-center gap-2">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          Nuestra historia
+        </h3>
+        <p class="text-slate-400 leading-relaxed">Nacimos con la pasión de proveer a los desarrolladores con las mejores
+          herramientas del mercado.</p>
+      </article>
+
+      <article
+        class="bg-slate-900/50 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition-colors">
+        <h3 class="text-amber-400 font-bold text-xl mb-3 flex items-center gap-2">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Misión
+        </h3>
+        <p class="text-slate-400 leading-relaxed">Ofrecer soluciones de hardware eficientes, estéticas y accesibles para
+          potenciar tu productividad.</p>
+      </article>
+
+      <article
+        class="bg-slate-900/50 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition-colors">
+        <h3 class="text-amber-400 font-bold text-xl mb-3 flex items-center gap-2">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          Visión
+        </h3>
+        <p class="text-slate-400 leading-relaxed">Convertirnos en la tienda de referencia para la comunidad de
+          tecnología en todo el país.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <h2 class="text-3xl font-bold text-white">Catálogo de Productos</h2>
+        <p class="text-slate-400 mt-2">Nuestros artículos más populares.</p>
+      </div>
+      <a routerLink="/productos" class="text-amber-500 hover:text-amber-400 font-semibold text-sm transition-colors">Ver
+        todo &rarr;</a>
+    </div>
+
+    <div class="overflow-x-auto rounded-2xl border border-slate-800 shadow-lg">
+      <table class="w-full text-left text-sm text-slate-400">
+        <thead class="bg-slate-900 text-slate-300 uppercase font-semibold">
+          <tr>
+            <th scope="col" class="px-6 py-4">Producto</th>
+            <th scope="col" class="px-6 py-4">Descripción</th>
+            <th scope="col" class="px-6 py-4 text-right">Precio</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800 bg-black">
+          <tr class="hover:bg-slate-900/50 transition-colors">
+            <td class="px-6 py-4 font-medium text-white">Teclado Mecánico 60% Slim</td>
+            <td class="px-6 py-4">Diseño plano y compacto, ideal para programación con perfil bajo.</td>
+            <td class="px-6 py-4 text-right font-bold text-amber-500">$85.00</td>
+          </tr>
+          <tr class="hover:bg-slate-900/50 transition-colors">
+            <td class="px-6 py-4 font-medium text-white">Monitor UltraWide 34"</td>
+            <td class="px-6 py-4">Pantalla curva para máximo espacio de trabajo en tu código.</td>
+            <td class="px-6 py-4 text-right font-bold text-amber-500">$320.00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="contacto" class="max-w-2xl mx-auto w-full">
+    <div class="bg-slate-900/80 p-8 rounded-3xl border border-slate-800 shadow-2xl">
+      <h2 class="text-2xl font-bold text-white mb-6 text-center">Envíanos un mensaje</h2>
+
+      <form class="flex flex-col gap-5">
+
+        <div>
+          <label for="nombre" class="block text-sm font-medium text-slate-400 mb-2">Nombre Completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ej. Angel Dev"
+            class="w-full bg-black text-slate-300 border border-slate-700 rounded-xl py-3 px-4 focus:outline-none focus:border-amber-400 focus:shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all">
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-slate-400 mb-2">Correo Electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com"
+            class="w-full bg-black text-slate-300 border border-slate-700 rounded-xl py-3 px-4 focus:outline-none focus:border-amber-400 focus:shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all">
+        </div>
+
+        <div>
+          <label for="mensaje" class="block text-sm font-medium text-slate-400 mb-2">Tu Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="4" placeholder="¿En qué podemos ayudarte?"
+            class="w-full bg-black text-slate-300 border border-slate-700 rounded-xl py-3 px-4 focus:outline-none focus:border-amber-400 focus:shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all resize-none"></textarea>
+        </div>
+
+        <button type="submit"
+          class="mt-4 w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black py-3 rounded-xl font-bold shadow-lg shadow-amber-900/40 transition-all active:scale-[0.98]">
+          Enviar Mensaje
+        </button>
+
+      </form>
+    </div>
+  </section>
+
+</div>

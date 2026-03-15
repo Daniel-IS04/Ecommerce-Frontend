@@ -1,0 +1,19 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h3>Iniciar Sesión</h3>
+
+    <div class="form-group">
+      <input type="email" [(ngModel)]="credenciales.email" placeholder="Correo electrónico" name="email">
+      <input type="password" [(ngModel)]="credenciales.password" placeholder="Contraseña" name="password">
+
+      <button (click)="ejecutarLogin()">Entrar</button>
+    </div>
+
+    @if (mensaje()) {
+    <div class="mensaje-box" [class.success]="mensaje().includes('Bienvenido')"
+      [class.error]="mensaje().includes('incorrectas')">
+      <small>{{ mensaje() }}</small>
+    </div>
+    }
+  </div>
+</div>
