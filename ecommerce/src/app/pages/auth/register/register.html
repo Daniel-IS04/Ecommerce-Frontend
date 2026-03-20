@@ -1,1 +1,115 @@
-<p>register works!</p>
+<div class="min-h-screen w-full flex bg-white text-black font-sans selection:bg-black selection:text-white">
+
+  <div class="hidden lg:flex w-[40%] bg-black text-white flex-col justify-between p-12">
+    <div>
+      <span class="font-bold text-xl tracking-tighter uppercase">Nombre Empresa</span>
+    </div>
+    <div class="max-w-sm">
+      <h1 class="text-5xl font-bold leading-[1.1] tracking-tight">Crea una cuenta para empezar.</h1>
+      <p class="mt-6 text-neutral-400 text-lg">Únete a la nueva generación de gestión digital con elegancia y
+        simplicidad.</p>
+    </div>
+    <div class="text-neutral-500 text-sm">
+      &copy; 2026 Todos los derechos reservados.
+    </div>
+  </div>
+
+  <div class="flex-1 flex items-center justify-center p-6 sm:p-12 lg:p-20 overflow-y-auto">
+
+    <div class="w-full max-w-xl">
+      <div class="mb-12 lg:hidden">
+        <span class="font-bold text-lg tracking-tighter uppercase">Nombre Empresa</span>
+      </div>
+
+      <div class="mb-10">
+        <h2 class="text-3xl font-bold tracking-tight">Registro</h2>
+        <p class="text-neutral-500 mt-2">Completa los campos para configurar tu perfil.</p>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-8">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+          <div class="group">
+            <label for="first_name"
+              class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 group-focus-within:text-black transition-colors">Nombre</label>
+            <input type="text" id="first_name" formControlName="first_name"
+              class="w-full py-3 bg-transparent border-b border-neutral-200 focus:border-black outline-none transition-all placeholder:text-neutral-300"
+              placeholder="Ej. Angelo">
+            @if (registerForm.get('first_name')?.invalid && registerForm.get('first_name')?.touched) {
+            <span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter mt-1 block">Requerido</span>
+            }
+          </div>
+
+          <div class="group">
+            <label for="last_name"
+              class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 group-focus-within:text-black transition-colors">Apellido</label>
+            <input type="text" id="last_name" formControlName="last_name"
+              class="w-full py-3 bg-transparent border-b border-neutral-200 focus:border-black outline-none transition-all placeholder:text-neutral-300"
+              placeholder="Ej. Quispe">
+            @if (registerForm.get('last_name')?.invalid && registerForm.get('last_name')?.touched) {
+            <span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter mt-1 block">Requerido</span>
+            }
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+          <div class="group">
+            <label for="email"
+              class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 group-focus-within:text-black transition-colors">Email</label>
+            <input type="email" id="email" formControlName="email"
+              class="w-full py-3 bg-transparent border-b border-neutral-200 focus:border-black outline-none transition-all placeholder:text-neutral-300"
+              placeholder="angelo@ejemplo.com">
+            @if (registerForm.get('email')?.touched) {
+            @if (registerForm.get('email')?.hasError('required')) { <span
+              class="text-[10px] font-bold text-red-500 uppercase tracking-tighter mt-1 block">Requerido</span> }
+            @else if (registerForm.get('email')?.hasError('email')) { <span
+              class="text-[10px] font-bold text-red-500 uppercase tracking-tighter mt-1 block">Email Inválido</span> }
+            }
+          </div>
+
+          <div class="group">
+            <label for="dni"
+              class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 group-focus-within:text-black transition-colors">DNI</label>
+            <input type="text" id="dni" formControlName="dni" maxlength="8"
+              class="w-full py-3 bg-transparent border-b border-neutral-200 focus:border-black outline-none transition-all placeholder:text-neutral-300"
+              placeholder="00000000">
+            @if (registerForm.get('dni')?.touched && registerForm.get('dni')?.invalid) {
+            <span class="text-[10px] font-bold text-red-500 uppercase tracking-tighter mt-1 block">8 Dígitos
+              necesarios</span>
+            }
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+          <div class="group">
+            <label for="password"
+              class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 group-focus-within:text-black transition-colors">Contraseña</label>
+            <input type="password" id="password" formControlName="password"
+              class="w-full py-3 bg-transparent border-b border-neutral-200 focus:border-black outline-none transition-all placeholder:text-neutral-300"
+              placeholder="••••••••">
+          </div>
+
+          <div class="group">
+            <label for="password2"
+              class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 group-focus-within:text-black transition-colors">Confirmar</label>
+            <input type="password" id="password2" formControlName="password2"
+              class="w-full py-3 bg-transparent border-b border-neutral-200 focus:border-black outline-none transition-all placeholder:text-neutral-300"
+              placeholder="••••••••">
+          </div>
+        </div>
+
+        <div class="pt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <a routerLink="../login" class="text-sm font-semibold text-neutral-400 hover:text-black transition-colors">
+            Ya tengo una cuenta
+          </a>
+          <button type="submit" [disabled]="registerForm.invalid"
+            class="w-full sm:w-auto px-10 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest hover:bg-neutral-800 disabled:bg-neutral-200 disabled:text-neutral-400 transition-all">
+            Registrarse
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

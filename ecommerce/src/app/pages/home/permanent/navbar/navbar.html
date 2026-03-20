@@ -1,0 +1,63 @@
+<nav
+  class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-neutral-100 selection:bg-black selection:text-white">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+
+    <div class="flex items-center">
+      <a routerLink="/"
+        class="text-xl font-extrabold tracking-tighter uppercase text-black hover:opacity-70 transition-opacity">
+        Nombre Empresa
+      </a>
+    </div>
+
+    <div class="hidden md:flex items-center gap-10">
+      <a routerLink="/tienda"
+        class="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500 hover:text-black transition-colors">Colecciones</a>
+      <a routerLink="/nosotros"
+        class="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500 hover:text-black transition-colors">Nosotros</a>
+      <a routerLink="/contacto"
+        class="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-500 hover:text-black transition-colors">Contacto</a>
+    </div>
+
+    <div class="flex items-center gap-6">
+      <button class="text-neutral-400 hover:text-black transition-colors hidden sm:block">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+      </button>
+
+      @if (!authService.isLoggedIn()) {
+      <a routerLink="/auth/login"
+        class="text-[11px] font-bold uppercase tracking-widest px-6 py-2.5 border border-neutral-200 rounded-full hover:border-black hover:bg-black hover:text-white transition-all duration-300">
+        Login
+      </a>
+      <a routerLink="/auth/register"
+        class="hidden sm:block text-[11px] font-bold uppercase tracking-widest px-6 py-2.5 bg-black text-white rounded-full hover:bg-neutral-800 transition-all shadow-lg shadow-black/5">
+        Únete
+      </a>
+      } @else {
+      <a routerLink="/perfil"
+        class="text-[11px] font-bold uppercase tracking-widest text-black hover:text-neutral-500 transition-colors">
+        Mi Cuenta
+      </a>
+      <button (click)="authService.logout()"
+        class="hidden sm:block text-[11px] font-bold uppercase tracking-widest px-6 py-2.5 border border-neutral-200 rounded-full hover:border-red-600 hover:text-red-600 transition-all duration-300">
+        Salir
+      </button>
+      }
+
+      <button class="md:hidden text-black p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12" />
+          <line x1="4" x2="20" y1="6" y2="6" />
+          <line x1="4" x2="20" y1="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<div class="h-20 w-full"></div>

@@ -1,1 +1,114 @@
-<p>login works!</p>
+<div class="min-h-screen w-full flex bg-white text-black font-sans">
+  <!-- LEFT SIDE (solo desktop) -->
+  <div class="hidden lg:flex w-1/2 bg-black text-white items-center justify-center p-12">
+    <div class="max-w-md">
+      <h1 class="text-4xl font-semibold leading-tight">
+        Bienvenido a<br>Nombre Empresa
+      </h1>
+      <p class="mt-4 text-white/60 text-sm">
+        Plataforma moderna para gestionar tu negocio de forma simple y elegante.
+      </p>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="flex w-full lg:w-1/2 items-center justify-center p-6 sm:p-10">
+
+    <!-- CARD -->
+    <div class="w-full max-w-md">
+
+      <!-- LOGO MOBILE -->
+      <div class="mb-8 lg:hidden text-center">
+        <span class="font-semibold tracking-widest uppercase text-sm">
+          Nombre Empresa
+        </span>
+      </div>
+
+      <!-- HEADER -->
+      <div class="mb-8">
+        <h2 class="text-3xl font-semibold tracking-tight">
+          Iniciar sesión
+        </h2>
+        <p class="text-sm text-neutral-500 mt-2">
+          Ingresa tus credenciales
+        </p>
+      </div>
+
+      <!-- ERROR -->
+      @if (errorMessage){
+        <div class="bg-black text-white px-4 py-3 rounded-lg mb-6 text-sm">
+          {{errorMessage}}
+        </div>
+      }
+
+      <!-- FORM -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+
+        <!-- EMAIL -->
+        <div>
+          <label class="block text-sm mb-2 text-neutral-600">
+            Correo electrónico
+          </label>
+          <input type="email" formControlName="email"
+            class="w-full px-4 py-3 border border-neutral-300 rounded-lg
+                   focus:outline-none focus:border-black
+                   transition-all duration-200">
+
+          @if (loginForm.get('email')?.touched){
+            @if(loginForm.get('email')?.hasError('required')){
+              <span class="text-xs mt-2 block text-neutral-500">
+                El correo es obligatorio.
+              </span>
+            } @else if (loginForm.get('email')?.hasError('email')){
+              <span class="text-xs mt-2 block text-neutral-500">
+                Formato inválido.
+              </span>
+            }
+          }
+        </div>
+
+        <!-- PASSWORD -->
+        <div>
+          <label class="block text-sm mb-2 text-neutral-600">
+            Contraseña
+          </label>
+          <input type="password" formControlName="password"
+            class="w-full px-4 py-3 border border-neutral-300 rounded-lg
+                   focus:outline-none focus:border-black
+                   transition-all duration-200">
+
+          @if(loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')){
+            <span class="text-xs mt-2 block text-neutral-500">
+              La contraseña es obligatoria.
+            </span>
+          }
+        </div>
+
+        <!-- BUTTON -->
+        <button type="submit" [disabled]="loginForm.invalid || isLoading"
+          class="w-full bg-black text-white py-3 rounded-lg font-medium
+                 hover:bg-neutral-800 transition-all duration-200
+                 disabled:opacity-50">
+
+          @if(isLoading){
+            Procesando...
+          } @else {
+            Continuar
+          }
+        </button>
+
+        <!-- FOOTER -->
+        <div class="text-center mt-6">
+          <p class="text-sm text-neutral-500">
+            ¿No tienes cuenta?
+            <a routerLink="../register"
+               class="text-black font-medium hover:underline ml-1">
+               Regístrate
+            </a>
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
