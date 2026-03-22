@@ -47,7 +47,7 @@ export interface LoginUser {
 
 // 3. Contrato exacto de lo que Angular recibe (HTTP 200)
 export interface LoginResponse {
-  name: LoginUser; // Respetando la clave "name" que impone tu backend
+  user: LoginUser; // Respetando la clave "name" que impone tu backend
   success: boolean;
   token: string; // Tu JWT real
 }
