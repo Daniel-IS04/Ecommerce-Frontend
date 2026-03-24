@@ -1,10 +1,10 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment.development';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, finalize } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode'; // Importamos la librería
-
+import { Router } from '@angular/router';
 // Asegúrate de que tus interfaces coincidan con la nueva respuesta
 import {
   RegisterPayload,
@@ -23,6 +23,16 @@ export interface DecodedToken {
   exp: number;
   iat: number;
 }
+export interface ProfileData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  role: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -33,8 +43,10 @@ export class Auth {
   // Signals para manejar la reactividad en toda la app
   isLoggedIn = signal<boolean>(this.checkToken());
   currentUser = signal<DecodedToken | null>(this.getUserFromToken());
-
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router, // <--- Solución aquí
+  ) {}
 
   private checkToken(): boolean {
     if (typeof window !== 'undefined' && localStorage) {
@@ -43,7 +55,6 @@ export class Auth {
     return false;
   }
 
-  // Método privado para leer el token al recargar (F5)
   private getUserFromToken(): DecodedToken | null {
     if (typeof window !== 'undefined' && localStorage) {
       const token = localStorage.getItem('access_token');
@@ -51,7 +62,7 @@ export class Auth {
         try {
           return jwtDecode<DecodedToken>(token);
         } catch (error) {
-          return null; // Si el token es inválido o corrupto
+          return null;
         }
       }
     }
@@ -102,12 +113,35 @@ export class Auth {
   }
 
   logout() {
-    // Solo limpiamos lo que el frontend controla
-    localStorage.removeItem('access_token');
-    this.isLoggedIn.set(false);
-    this.currentUser.set(null);
-
-    // NOTA: Para un logout completo, deberíamos llamar a un endpoint de Django
-    // para que invalide la cookie HttpOnly del refresh token.
+    // Le pegamos al backend para que haga el .delete() en la base de datos
+    // Usamos withCredentials para que Angular envíe la cookie del refresh
+    this.http
+      .post(`${this.apiDJ}/users/logout/`, {}, { withCredentials: true })
+      .pipe(
+        // Finalize se ejecuta SIEMPRE, ya sea que el backend responda 200 o de error
+        finalize(() => {
+          localStorage.removeItem('access_token');
+          this.isLoggedIn.set(false);
+          this.currentUser.set(null);
+          this.router.navigate(['/auth/login']); // Usas this.router
+        }),
+      )
+      .subscribe();
+  }
+  refreshToken(): Observable<{ token: string }> {
+    // Va al backend con la cookie a pedir un nuevo access_token
+    return this.http
+      .post<{ token: string }>(`${this.apiDJ}/users/refresh/`, {}, { withCredentials: true })
+      .pipe(
+        tap((response) => {
+          // Actualizamos la memoria silenciosamente
+          localStorage.setItem('access_token', response.token);
+          const decoded = jwtDecode<DecodedToken>(response.token);
+          this.currentUser.set(decoded);
+        }),
+      );
+  }
+  Profile(): Observable<ProfileData> {
+    return this.http.get<ProfileData>(`${this.apiDJ}/users/me/`);
   }
 }

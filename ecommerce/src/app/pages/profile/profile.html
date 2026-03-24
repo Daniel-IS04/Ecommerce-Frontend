@@ -1,0 +1,31 @@
+@if (profile_data) {
+<div class="max-w-md mx-auto mt-10 bg-white rounded-xl shadow-md p-8 border border-gray-200">
+
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-gray-800">
+      {{ profile_data.first_name }} {{ profile_data.last_name }}
+    </h2>
+    <p class="text-sm text-gray-500">{{ profile_data.email }}</p>
+  </div>
+
+  <div class="mt-6 space-y-3">
+    <p class="text-gray-700">
+      <span class="font-semibold">Teléfono:</span> {{ profile_data.phone_number }}
+    </p>
+    <p class="text-gray-700">
+      <span class="font-semibold">Rol:</span> <span class="capitalize">{{ profile_data.role }}</span>
+    </p>
+    <p class="text-gray-700">
+      <span class="font-semibold">Estado:</span>
+      <span class="font-medium" [class]="profile_data.is_active ? 'text-green-600' : 'text-red-600'">
+        {{ profile_data.is_active ? 'Activo' : 'Inactivo' }}
+      </span>
+    </p>
+  </div>
+
+</div>
+} @else {
+<div class="flex justify-center items-center h-screen">
+  <p class="text-lg font-medium text-gray-500">Cargando perfil...</p>
+</div>
+}
