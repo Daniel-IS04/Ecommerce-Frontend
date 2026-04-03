@@ -40,8 +40,10 @@
       <a routerLink="/perfil"
         class="text-[11px] font-bold uppercase tracking-widest text-black hover:text-neutral-500 transition-colors">
         {{this.authService.currentUser()?.first_name}}
-
       </a>
+      @if (authService.currentUser()?.role !== "user"){
+            <h1>authService.currentUser.()?role </h1>
+        }
       <button (click)="authService.logout()"
         class="hidden sm:block text-[11px] font-bold uppercase tracking-widest px-6 py-2.5 border border-neutral-200 rounded-full hover:border-red-600 hover:text-red-600 transition-all duration-300">
         Salir

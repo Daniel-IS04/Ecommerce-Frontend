@@ -33,7 +33,16 @@ export interface ProfileData {
   created_at: string;
   updated_at: string;
 }
-
+export interface ProfileData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  role: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -143,5 +152,8 @@ export class Auth {
   }
   Profile(): Observable<ProfileData> {
     return this.http.get<ProfileData>(`${this.apiDJ}/users/me/`);
+  }
+  UpdateProfile(data: Partial<ProfileData>) {
+    return this.http.patch<ProfileData>(`${this.apiDJ}/users/me/`, data);
   }
 }

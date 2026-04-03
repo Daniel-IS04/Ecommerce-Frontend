@@ -36,6 +36,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
             const newRequest = req.clone({
               setHeaders: { Authorization: `Bearer ${response.token}` },
             });
+            console.log('access_token actualizado');
             return next(newRequest);
           }),
           catchError((refreshError) => {
